@@ -111,14 +111,14 @@ with st.container(horizontal=True):
     <style>
         .kpi-wrapper {
             display: grid;
-            /* Crea columnas proporcionales que llenan todo el espacio */
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            flex-wrap: wrap;         /* Permite que las tarjetas bajen de renglón si no caben */
             gap: 16px;
-            width: 100%;             /* Fuerza al contenedor a usar todo el ancho de Streamlit */
             margin-bottom: 1.5rem;
+            width: 100%;             /* Fuerza al contenedor a usar todo el espacio disponible */
         }
         .kpi-card-guinda {
-            width: 100%;             /* Obliga a la tarjeta a estirarse hasta el borde de su columna */
+            flex: 1 1 220px;         /* Magia responsiva: Crece, se encoge y tiene 220px de base */
+            min-width: 220px;        /* Límite absoluto antes de saltar a la siguiente fila */
             background-color: #9F2241;
             border-radius: 8px;
             padding: 16px 12px;
