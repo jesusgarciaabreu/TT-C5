@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import pydeck as pdk
 import base64
 from utils.carga_datos import cargar_incidentes, filtrar_incidentes
 from utils.graficas import (
@@ -267,9 +268,62 @@ col_mapa, col_ranking = st.columns([6, 4])
 
 with col_mapa:
     with st.container(border=True):
-        st.markdown("**Ubicación de los incidentes**")
-        st.plotly_chart(mapa_incidentes(df_filtrado), use_container_width=True)
+        st.markdown("**Densidad y Ubicación de los incidentes**")
+        
+        # 1. El selector tipo "switch" para cambiar de mapa
+        tipo_mapa = st.segmented_control(
+            "Estilo de visualización",
+            ["Original", "Hexágonos (2D)", "Elevación (3D)"],
+            default="Original"
+        )
 
+        if tipo_mapa == "Original":
+            # Muestra el mapa de Plotly que ya tenías
+            st.plotly_chart(mapa_incidentes(df_filtrado), use_container_width=True)
+            
+        else:
+            # 2. Lógica para los mapas de PyDeck
+            es_3d = (tipo_mapa == "Elevación (3D)")
+            
+            # Configuramos la cámara. Si es 3D, la inclinamos 45 grados (pitch)
+            view_state = pdk.ViewState(
+                latitude=df_filtrado["latitud"].mean(),
+                longitude=df_filtrado["longitud"].mean(),
+                zoom=11.5,
+                pitch=45 if es_3d else 0,
+                bearing=0
+            )
+
+            # Capa Hexagonal: Agrupa puntos cercanos automáticamente
+            capa_hex = pdk.Layer(
+                "HexagonLayer",
+                data=df_filtrado,
+                get_position=["longitud", "latitud"],
+                radius=250,          # Tamaño de cada hexágono en metros
+                elevation_scale=4,   # Qué tan altas se hacen las columnas 3D
+                elevation_range=[0, 1000],
+                pickable=True,
+                extruded=es_3d,      # True = 3D, False = 2D
+                # Paleta de colores personalizada (Termina en tu color guinda)
+                color_range=[
+                    [242, 214, 222],
+                    [224, 168, 184],
+                    [201, 115, 139],
+                    [181, 68, 98],
+                    [159, 34, 65],   # #9F2241 (Guinda)
+                    [110, 20, 43]
+                ],
+            )
+
+            # Renderizamos el mapa
+            mapa_pdk = pdk.Deck(
+                layers=[capa_hex],
+                initial_view_state=view_state,
+                tooltip={"text": "Incidentes en esta celda: {elevationValue}"},
+            )
+
+            st.pydeck_chart(mapa_pdk, use_container_width=True)
+            
 with col_ranking:
     with st.container(border=True):
         st.markdown("**Top Colonias con más incidentes**")
