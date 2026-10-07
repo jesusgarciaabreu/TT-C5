@@ -103,9 +103,9 @@ with st.container(horizontal=True):
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             margin-bottom: 1rem;
             transition: transform 0.2s ease;
-            display: flex;           /* Activa el modo de columnas (Flexbox) */
-            align-items: center;     /* Centra verticalmente ícono y texto */
-            gap: 18px;               /* Espacio entre el ícono y los textos */
+            display: flex;          
+            align-items: center;     
+            gap: 18px;               
         }
         .kpi-card-guinda:hover {
             transform: translateY(-2px);
@@ -116,8 +116,8 @@ with st.container(horizontal=True):
             justify-content: center;
         }
         .kpi-icon {
-            width: 36px;             /* Ícono más grande para la columna izquierda */
-            height: 36px;
+            width: 44px;             /* Ícono más grande para la columna izquierda */
+            height: 44px;
             filter: brightness(0) invert(1); 
         }
         .kpi-content {
@@ -126,14 +126,14 @@ with st.container(horizontal=True):
         }
         .kpi-title-guinda {
             color: #E2E8F0;
-            font-size: 0.85rem;
+            font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 2px;
             line-height: 1.2;
         }
         .kpi-value-guinda {
             color: #FFFFFF;
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             font-weight: 800;
             margin: 0;
             line-height: 1;
