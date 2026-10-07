@@ -148,7 +148,7 @@ css_tarjetas = """
         font-size: 1.1rem;
         font-weight: 500;
         margin: 0 0 4px 0;       
-        line-height: 1.2;
+        line-height: 1.5;
         white-space: normal;     
     }
     .kpi-value-guinda {
@@ -202,39 +202,47 @@ st.markdown(css_tarjetas + html_tarjetas, unsafe_allow_html=True)
 #    st.metric("Promedio diario", f"{len(df_filtrado) / dias_periodo:.1f}", border=True)
 #    st.metric("Hora pico", f"{hora_pico:02d}:00", border=True)
 
-with st.container(border=True):
-    st.subheader("Ubicación de los incidentes")
-    st.plotly_chart(mapa_incidentes(df_filtrado))
+st.divider() 
 
+# --- 1. ANÁLISIS ESPACIAL ---
+st.subheader("Análisis Espacial")
+col_mapa, col_ranking = st.columns([6, 4]) 
+
+with col_mapa:
+    with st.container(border=True):
+        st.markdown("**Ubicación de los incidentes**")
+        st.plotly_chart(mapa_incidentes(df_filtrado), use_container_width=True)
+
+with col_ranking:
+    with st.container(border=True):
+        st.markdown("**Top Colonias con más incidentes**")
+        st.plotly_chart(ranking_colonias(df_filtrado), use_container_width=True)
+
+# --- 2. TIPO DE INCIDENTE ---
+st.subheader("Clasificación de Incidentes")
 with st.container(border=True):
-    st.subheader("Evolución temporal")
+    st.plotly_chart(distribucion_tipo_incidente(df_filtrado), use_container_width=True)
+
+# --- 3. ANÁLISIS TEMPORAL (Agrupado en pestañas) ---
+st.subheader("Análisis Temporal")
+tab1, tab2, tab3 = st.tabs(["Evolución histórica", "Mapa de calor (Día/Hora)", "Distribuciones (Hora y Mes)"])
+
+with tab1:
     granularidad = st.segmented_control(
         "Agrupar por",
         ["Día", "Mes"],
         default="Día",
     ) or "Día"
-    st.plotly_chart(serie_temporal(df_filtrado, granularidad))
+    st.plotly_chart(serie_temporal(df_filtrado, granularidad), use_container_width=True)
 
-with st.container(border=True):
-    st.subheader("Día de la semana por hora")
-    st.plotly_chart(mapa_calor_dia_hora(df_filtrado))
+with tab2:
+    st.plotly_chart(mapa_calor_dia_hora(df_filtrado), use_container_width=True)
 
-col_izq, col_der = st.columns(2)
-with col_izq:
-    with st.container(border=True):
-        st.subheader("Colonias con más incidentes")
-        st.plotly_chart(ranking_colonias(df_filtrado))
-with col_der:
-    with st.container(border=True):
-        st.subheader("Tipo de incidente")
-        st.plotly_chart(distribucion_tipo_incidente(df_filtrado))
-
-col_hora, col_mes = st.columns(2)
-with col_hora:
-    with st.container(border=True):
-        st.subheader("Distribución por hora del día")
-        st.plotly_chart(distribucion_por_hora(df_filtrado))
-with col_mes:
-    with st.container(border=True):
-        st.subheader("Distribución por mes")
-        st.plotly_chart(distribucion_mensual(df_filtrado))
+with tab3:
+    col_hora, col_mes = st.columns(2)
+    with col_hora:
+        st.markdown("**Distribución por hora del día**")
+        st.plotly_chart(distribucion_por_hora(df_filtrado), use_container_width=True)
+    with col_mes:
+        st.markdown("**Distribución por mes**")
+        st.plotly_chart(distribucion_mensual(df_filtrado), use_container_width=True)
