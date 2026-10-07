@@ -24,39 +24,6 @@ st.html(
     """
 )
 
-st.markdown("""
-<style>
-    .kpi-card {
-        background-color: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 10px;
-        padding: 16px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        margin-bottom: 1rem;
-    }
-    .kpi-title {
-        color: #64748B;
-        font-size: 0.85rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        gap: 8px; /* Espacio entre tu ícono y el texto */
-    }
-    /* Estilo para asegurar que tus SVGs no se deformen */
-    .kpi-title svg, .kpi-title img {
-        width: 18px;
-        height: 18px;
-        fill: currentColor;
-    }
-    .kpi-value {
-        color: #0F172A;
-        font-size: 1.8rem;
-        font-weight: 800;
-        margin: 0;
-    }
-</style>
-""", unsafe_allow_html=True)
 
 st.title("Panorama histórico")
 
@@ -113,49 +80,86 @@ with st.container(horizontal=True):
     val_promedio = f"{len(df_filtrado) / dias_periodo:.1f}"
     val_hora = f"{hora_pico:02d}:00"
     
+    # Inyectamos el CSS actualizado para tarjetas con fondo Guinda
+    st.markdown("""
+    <style>
+        .kpi-card-guinda {
+            background-color: #9F2241;
+            border-radius: 10px;
+            padding: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            margin-bottom: 1rem;
+            transition: transform 0.2s ease;
+        }
+        .kpi-card-guinda:hover {
+            transform: translateY(-2px);
+        }
+        .kpi-title-guinda {
+            color: #E2E8F0; /* Gris muy claro para contraste */
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .kpi-title-guinda svg, .kpi-title-guinda img {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+        .kpi-value-guinda {
+            color: #FFFFFF; /* Blanco puro para los números */
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+    
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
         st.markdown(f"""
-        <div class="kpi-card" style="border-left: 5px solid #9F2241;">
-            <div class="kpi-title">
+        <div class="kpi-card-guinda">
+            <div class="kpi-title-guinda">
                 <!-- INSERTA TU ICONO AQUÍ -->
                 Incidentes en la selección
             </div>
-            <p class="kpi-value">{val_incidentes}</p>
+            <p class="kpi-value-guinda">{val_incidentes}</p>
         </div>
         """, unsafe_allow_html=True)
         
     with col2:
         st.markdown(f"""
-        <div class="kpi-card" style="border-left: 5px solid #235B4E;">
-            <div class="kpi-title">
+        <div class="kpi-card-guinda">
+            <div class="kpi-title-guinda">
                 <!-- INSERTA TU ICONO AQUÍ -->
                 Del total cargado
             </div>
-            <p class="kpi-value">{val_porcentaje}</p>
+            <p class="kpi-value-guinda">{val_porcentaje}</p>
         </div>
         """, unsafe_allow_html=True)
 
     with col3:
         st.markdown(f"""
-        <div class="kpi-card" style="border-left: 5px solid #BC955C;">
-            <div class="kpi-title">
+        <div class="kpi-card-guinda">
+            <div class="kpi-title-guinda">
                 <!-- INSERTA TU ICONO AQUÍ -->
                 Promedio diario
             </div>
-            <p class="kpi-value">{val_promedio}</p>
+            <p class="kpi-value-guinda">{val_promedio}</p>
         </div>
         """, unsafe_allow_html=True)
 
     with col4:
         st.markdown(f"""
-        <div class="kpi-card" style="border-left: 5px solid #1E3A8A;">
-            <div class="kpi-title">
+        <div class="kpi-card-guinda">
+            <div class="kpi-title-guinda">
                 <!-- INSERTA TU ICONO AQUÍ -->
                 Hora pico
             </div>
-            <p class="kpi-value">{val_hora}</p>
+            <p class="kpi-value-guinda">{val_hora}</p>
         </div>
         """, unsafe_allow_html=True)
 
