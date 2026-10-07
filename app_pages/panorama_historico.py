@@ -30,7 +30,26 @@ def get_base64_image(image_path):
         with open(image_path, "rb") as img_file:
             return base64.b64encode(img_file.read()).decode()
     except FileNotFoundError:
-        return "" # Devuelve vacío si no encuentra el ícono para no romper la app
+        return ""
+
+def titulo_estilizado(texto, color_texto="#1A365D"):
+    html = f"""
+    <div style="
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        padding-left: 12px;
+        border-left: 6px solid #9F2241; /* Acento estructural guinda */
+        color: {color_texto};
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1.6rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    ">
+        {texto}
+    </div>
+    """
+    st.markdown(html, unsafe_allow_html=True)
+
 
 st.title("Panorama histórico")
 
