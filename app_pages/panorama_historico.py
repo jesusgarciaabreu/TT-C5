@@ -196,11 +196,6 @@ html_tarjetas = f"""
 
 st.markdown(css_tarjetas + html_tarjetas, unsafe_allow_html=True)
 
-
-with st.container(border=True):
-    st.subheader("Ubicación de los incidentes")
-    st.plotly_chart(mapa_incidentes(df_filtrado))
-
 #with st.container(horizontal=True):
 #    st.metric("Incidentes en la selección", f"{len(df_filtrado):,}", border=True)
 #    st.metric("Del total cargado", f"{100 * len(df_filtrado) / len(df):.1f}%", border=True)
