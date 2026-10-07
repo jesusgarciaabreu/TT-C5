@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.streamlit/secrets.toml
+# Artefactos del modelo: pueden pesar bastante (pesos + grafo) y se
+# regeneran con scripts/exportar_despues_de_entrenar.py -- no hace
+# falta versionarlos en git.
+data/*.pt
+data/*.npy
+data/*.csv
+data/*.json
+!data/.gitkeep
+!data/df_hour_clean.csv
+static/inicio/hero.png
+static/inicio/arquitectura.png
