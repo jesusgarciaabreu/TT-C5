@@ -117,8 +117,8 @@ with st.container(horizontal=True):
             width: 100%;             
         }
         .kpi-card-guinda {
-            flex: 1 1 23%;         
-            min-width: 23%;        
+            flex: 1 1 calc(25% - 16px);         
+            min-width: 210px;        
             background-color: #9F2241;
             border-radius: 8px;
             padding: 16px 12px;
