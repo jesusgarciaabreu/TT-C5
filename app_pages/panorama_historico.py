@@ -107,20 +107,18 @@ with st.container(horizontal=True):
     icono_tendencias = get_base64_image("icons/tendencias.png")
     icono_reloj = get_base64_image("icons/reloj.png")
     
-    
-    
     css_tarjetas = """
     <style>
         .kpi-wrapper {
-            display: flex;
-            flex-wrap: wrap;         /* Permite que las tarjetas bajen de renglón si no caben */
+            display: grid;
+            /* Crea columnas proporcionales que llenan todo el espacio */
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 16px;
+            width: 100%;             /* Fuerza al contenedor a usar todo el ancho de Streamlit */
             margin-bottom: 1.5rem;
-            width: 100%;             /* Fuerza al contenedor a usar todo el espacio disponible */
         }
         .kpi-card-guinda {
-            flex: 1 1 220px;         /* Magia responsiva: Crece, se encoge y tiene 220px de base */
-            min-width: 220px;        /* Límite absoluto antes de saltar a la siguiente fila */
+            width: 100%;             /* Obliga a la tarjeta a estirarse hasta el borde de su columna */
             background-color: #9F2241;
             border-radius: 8px;
             padding: 16px 12px;
