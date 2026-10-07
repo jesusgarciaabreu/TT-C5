@@ -224,7 +224,7 @@ st.markdown(css_tarjetas + html_tarjetas, unsafe_allow_html=True)
 st.divider() 
 
 # --- 1. ANÁLISIS ESPACIAL ---
-st.subheader("Análisis Espacial")
+titulo_estilizado("Análisis Espacial")
 col_mapa, col_ranking = st.columns([6, 4]) 
 
 with col_mapa:
@@ -238,12 +238,12 @@ with col_ranking:
         st.plotly_chart(ranking_colonias(df_filtrado), use_container_width=True)
 
 # --- 2. TIPO DE INCIDENTE ---
-st.subheader("Clasificación de Incidentes")
+titulo_estilizado("Clasificación de Incidentes")
 with st.container(border=True):
     st.plotly_chart(distribucion_tipo_incidente(df_filtrado), use_container_width=True)
 
 # --- 3. ANÁLISIS TEMPORAL (Agrupado en pestañas) ---
-st.subheader("Análisis Temporal")
+titulo_estilizado("Análisis Temporal")
 tab1, tab2, tab3 = st.tabs(["Evolución histórica", "Mapa de calor (Día/Hora)", "Distribuciones (Hora y Mes)"])
 
 with tab1:
