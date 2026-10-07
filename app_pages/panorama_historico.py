@@ -102,113 +102,95 @@ with st.container(horizontal=True):
     val_promedio = f"{len(df_filtrado) / dias_periodo:.1f}"
     val_hora = f"{hora_pico:02d}:00"
     
-    # Cargamos tus íconos PNG a variables Base64
     icono_mapa = get_base64_image("icons/mapa.png")
     icono_embudo = get_base64_image("icons/embudo.png")
     icono_tendencias = get_base64_image("icons/tendencias.png")
     icono_reloj = get_base64_image("icons/reloj.png")
     
-    # CSS con Flexbox para dividir en dos columnas internas
-    st.markdown("""
+    css_tarjetas = """
     <style>
+        .kpi-wrapper {
+            display: grid;
+            /* La magia responsive: nunca serán menores a 230px, si no caben, bajan de fila */
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+            margin-bottom: 1.5rem;
+        }
         .kpi-card-guinda {
             background-color: #9F2241;
-            border-radius: 10px;
-            padding: 16px 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            margin-bottom: 1rem;
-            transition: transform 0.2s ease;
-            display: flex;          
+            border-radius: 8px;
+            padding: 16px 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;           
             align-items: center;     
-            gap: 18px;               
-        }
-        .kpi-card-guinda:hover {
-            transform: translateY(-2px);
-        }
-        .kpi-icon-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            gap: 12px;
+            height: 110px;           
+            box-sizing: border-box;  
         }
         .kpi-icon {
-            width: 50px;             /* Ícono más grande para la columna izquierda */
-            height: 50px;
+            width: 36px;             
+            height: 36px;
+            flex-shrink: 0;          
             filter: brightness(0) invert(1); 
         }
-        .kpi-content {
+        .kpi-text-container {
             display: flex;
-            flex-direction: column;  /* Agrupa título y número uno sobre el otro */
+            flex-direction: column;  
+            justify-content: center;
+            overflow: hidden;        
         }
         .kpi-title-guinda {
             color: #E2E8F0;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 2px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 0 0 2px 0;       
             line-height: 1.2;
+            white-space: normal;     
         }
         .kpi-value-guinda {
             color: #FFFFFF;
-            font-size: 2.5rem !important;
+            font-size: 2.2rem !important;       
             font-weight: 800;
             margin: 0;
             line-height: 1;
         }
     </style>
-    """, unsafe_allow_html=True)
-    
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        st.markdown(f"""
+    """
+
+    html_tarjetas = f"""
+    <div class="kpi-wrapper">
         <div class="kpi-card-guinda">
-            <div class="kpi-icon-wrapper">
-                <img src="data:image/png;base64,{icono_mapa}" class="kpi-icon">
-            </div>
-            <div class="kpi-content">
+            <img src="data:image/png;base64,{icono_mapa}" class="kpi-icon">
+            <div class="kpi-text-container">
                 <div class="kpi-title-guinda">Incidentes en la selección</div>
-                <p class="kpi-value-guinda">{val_incidentes}</p>
+                <div class="kpi-value-guinda">{val_incidentes}</div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-        
-    with col2:
-        st.markdown(f"""
         <div class="kpi-card-guinda">
-            <div class="kpi-icon-wrapper">
-                <img src="data:image/png;base64,{icono_embudo}" class="kpi-icon">
-            </div>
-            <div class="kpi-content">
+            <img src="data:image/png;base64,{icono_embudo}" class="kpi-icon">
+            <div class="kpi-text-container">
                 <div class="kpi-title-guinda">Del total cargado</div>
-                <p class="kpi-value-guinda">{val_porcentaje}</p>
+                <div class="kpi-value-guinda">{val_porcentaje}</div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-
-    with col3:
-        st.markdown(f"""
         <div class="kpi-card-guinda">
-            <div class="kpi-icon-wrapper">
-                <img src="data:image/png;base64,{icono_tendencias}" class="kpi-icon">
-            </div>
-            <div class="kpi-content">
+            <img src="data:image/png;base64,{icono_tendencias}" class="kpi-icon">
+            <div class="kpi-text-container">
                 <div class="kpi-title-guinda">Promedio diario</div>
-                <p class="kpi-value-guinda">{val_promedio}</p>
+                <div class="kpi-value-guinda">{val_promedio}</div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-
-    with col4:
-        st.markdown(f"""
         <div class="kpi-card-guinda">
-            <div class="kpi-icon-wrapper">
-                <img src="data:image/png;base64,{icono_reloj}" class="kpi-icon">
-            </div>
-            <div class="kpi-content">
+            <img src="data:image/png;base64,{icono_reloj}" class="kpi-icon">
+            <div class="kpi-text-container">
                 <div class="kpi-title-guinda">Hora pico</div>
-                <p class="kpi-value-guinda">{val_hora}</p>
+                <div class="kpi-value-guinda">{val_hora}</div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+    </div>
+    """
+
+    st.markdown(css_tarjetas + html_tarjetas, unsafe_allow_html=True)
 
 #with st.container(horizontal=True):
 #    st.metric("Incidentes en la selección", f"{len(df_filtrado):,}", border=True)
