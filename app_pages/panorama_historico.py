@@ -41,36 +41,51 @@ dias_disponibles = df["dia_semana"].dropna().unique().tolist()
 franjas_disponibles = df["franja_horaria"].dropna().unique().tolist()
 tipos_disponibles = sorted(df["incidente_c4"].dropna().unique().tolist())
 
-with st.container(horizontal=True, vertical_alignment="center"):
+
+with st.sidebar:
+    st.header("Filtros de Análisis")
+    
     solo_confirmados = st.toggle(
         "Solo confirmados",
         value=True,
-        help=(
-            "Excluye reportes que no se confirmaron como incidente real -- "
-            "el mismo filtro usado en el análisis de Moran's I del TT."
-        ),
+        help="Excluye reportes que no se confirmaron como incidente real."
     )
-    with st.popover("Filtros"):
-        anios_sel = st.pills(
-            "Año",
-            anios_disponibles,
-            selection_mode="multi",
-            default=anios_disponibles,
-        )
-        dias_sel = st.multiselect("Día de la semana", dias_disponibles, default=dias_disponibles)
-        franjas_sel = st.multiselect("Franja horaria", franjas_disponibles, default=franjas_disponibles)
-        tipos_sel = st.multiselect("Tipo de incidente", tipos_disponibles, default=tipos_disponibles)
+    
+    st.divider() 
+    
+    anios_sel = st.pills("Año", anios_disponibles, selection_mode="multi")
+    
+    dias_sel = st.multiselect(
+        "Día de la semana", 
+        dias_disponibles, 
+        placeholder="Todos los días"
+    )
+    
+    franjas_sel = st.multiselect(
+        "Franja horaria", 
+        franjas_disponibles, 
+        placeholder="Todas las franjas"
+    )
+    
+    tipos_sel = st.multiselect(
+        "Tipo de incidente", 
+        tipos_disponibles, 
+        placeholder="Todos los tipos"
+    )
 
-if not (anios_sel and dias_sel and franjas_sel and tipos_sel):
-    st.warning("Sin selección no hay registros. Elige al menos un valor en cada filtro.")
-    st.stop()
+# Si el usuario no elige nada (lista vacía), pasamos todos los datos
+anios_filtro = anios_sel if anios_sel else anios_disponibles
+dias_filtro = dias_sel if dias_sel else dias_disponibles
+franjas_filtro = franjas_sel if franjas_sel else franjas_disponibles
+tipos_filtro = tipos_sel if tipos_sel else tipos_disponibles
+
 
 df_filtrado = filtrar_incidentes(
     df,
-    anios=anios_sel,
-    dias_semana=dias_sel,
-    franjas_horarias=franjas_sel,
-    tipos_incidente=tipos_sel,
+    anios=anios_filtro,
+    dias_semana=dias_filtro,
+    franjas_horarias=franjas_filtro,
+    tipos_incidente=tipos_filtro,
     solo_confirmados=solo_confirmados,
 )
 
