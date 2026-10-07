@@ -73,93 +73,12 @@ if df_filtrado.empty:
 dias_periodo = max((df_filtrado["fecha_hora"].max() - df_filtrado["fecha_hora"].min()).days, 1)
 hora_pico = int(df_filtrado.groupby("hora").size().idxmax())
 
-#Estilo para las tarjetas de metricas 
-st.markdown("""
-<style>
-    .kpi-card {
-        background-color: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 10px;
-        padding: 16px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        margin-bottom: 1rem;
-    }
-    .kpi-title {
-        color: #64748B;
-        font-size: 0.85rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        gap: 8px; /* Espacio entre tu ícono y el texto */
-    }
-    /* Estilo para asegurar que tus SVGs no se deformen */
-    .kpi-title svg, .kpi-title img {
-        width: 18px;
-        height: 18px;
-        fill: currentColor;
-    }
-    .kpi-value {
-        color: #0F172A;
-        font-size: 1.8rem;
-        font-weight: 800;
-        margin: 0;
-    }
-</style>
-""", unsafe_allow_html=True)
 
 with st.container(horizontal=True):
-    val_incidentes = f"{len(df_filtrado):,}"
-    val_porcentaje = f"{100 * len(df_filtrado) / len(df):.1f}%"
-    val_promedio = f"{len(df_filtrado) / dias_periodo:.1f}"
-    val_hora = f"{hora_pico:02d}:00"
-    #st.metric("Incidentes en la selección", f"{len(df_filtrado):,}", border=True)
-    #st.metric("Del total cargado", f"{100 * len(df_filtrado) / len(df):.1f}%", border=True)
-    #st.metric("Promedio diario", f"{len(df_filtrado) / dias_periodo:.1f}", border=True)
-    #st.metric("Hora pico", f"{hora_pico:02d}:00", border=True)
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-    st.markdown(f"""
-    <div class="kpi-card" style="border-left: 5px solid #9F2241;">
-        <div class="kpi-title">
-            <!-- INSERTA TU ICONO AQUÍ -->
-            Incidentes en la selección
-        </div>
-        <p class="kpi-value">{val_incidentes}</p>
-    </div>
-    """, unsafe_allow_html=True)
-    with col2:
-    st.markdown(f"""
-    <div class="kpi-card" style="border-left: 5px solid #235B4E;">
-        <div class="kpi-title">
-            <!-- INSERTA TU ICONO AQUÍ -->
-            Del total cargado
-        </div>
-        <p class="kpi-value">{val_porcentaje}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    with col3:
-        st.markdown(f"""
-        <div class="kpi-card" style="border-left: 5px solid #BC955C;">
-            <div class="kpi-title">
-                <!-- INSERTA TU ICONO AQUÍ -->
-                Promedio diario
-            </div>
-            <p class="kpi-value">{val_promedio}</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col4:
-        st.markdown(f"""
-        <div class="kpi-card" style="border-left: 5px solid #1E3A8A;">
-            <div class="kpi-title">
-                <!-- INSERTA TU ICONO AQUÍ -->
-                Hora pico
-            </div>
-            <p class="kpi-value">{val_hora}</p>
-        </div>
-        """, unsafe_allow_html=True)
+    st.metric("Incidentes en la selección", f"{len(df_filtrado):,}", border=True)
+    st.metric("Del total cargado", f"{100 * len(df_filtrado) / len(df):.1f}%", border=True)
+    st.metric("Promedio diario", f"{len(df_filtrado) / dias_periodo:.1f}", border=True)
+    st.metric("Hora pico", f"{hora_pico:02d}:00", border=True)
 
 with st.container(border=True):
     st.subheader("Ubicación de los incidentes")
