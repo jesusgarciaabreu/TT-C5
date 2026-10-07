@@ -86,12 +86,14 @@ with st.container(horizontal=True):
     val_porcentaje = f"{100 * len(df_filtrado) / len(df):.1f}%"
     val_promedio = f"{len(df_filtrado) / dias_periodo:.1f}"
     val_hora = f"{hora_pico:02d}:00"
-
-    mapa = get_base64_image("icons/mapa.png")
-    embudo = get_base64_image("icons/embudo.png")
-    tendencias = get_base64_image("icons/tendencias.png")
-    reloj = get_base64_image("icons/reloj.png")
-    # Inyectamos el CSS actualizado para tarjetas con fondo Guinda
+    
+    # Cargamos tus íconos PNG a variables Base64
+    icono_mapa = get_base64_image("icons/mapa.png")
+    icono_embudo = get_base64_image("icons/embudo.png")
+    icono_tendencias = get_base64_image("icons/tendencias.png")
+    icono_reloj = get_base64_image("icons/reloj.png")
+    
+    # CSS con Flexbox para dividir en dos columnas internas
     st.markdown("""
     <style>
         .kpi-card-guinda {
@@ -101,9 +103,9 @@ with st.container(horizontal=True):
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             margin-bottom: 1rem;
             transition: transform 0.2s ease;
-            display: flex;           
-            align-items: center;     
-            gap: 18px;               
+            display: flex;           /* Activa el modo de columnas (Flexbox) */
+            align-items: center;     /* Centra verticalmente ícono y texto */
+            gap: 18px;               /* Espacio entre el ícono y los textos */
         }
         .kpi-card-guinda:hover {
             transform: translateY(-2px);
@@ -114,13 +116,13 @@ with st.container(horizontal=True):
             justify-content: center;
         }
         .kpi-icon {
-            width: 36px;             
+            width: 36px;             /* Ícono más grande para la columna izquierda */
             height: 36px;
             filter: brightness(0) invert(1); 
         }
         .kpi-content {
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;  /* Agrupa título y número uno sobre el otro */
         }
         .kpi-title-guinda {
             color: #E2E8F0;
@@ -144,44 +146,52 @@ with st.container(horizontal=True):
     with col1:
         st.markdown(f"""
         <div class="kpi-card-guinda">
-            <div class="kpi-title-guinda">
-                <img src="data:image/png;base64,{mapa}" class="kpi-icon">
-                Incidentes en la selección
+            <div class="kpi-icon-wrapper">
+                <img src="data:image/png;base64,{icono_mapa}" class="kpi-icon">
             </div>
-            <p class="kpi-value-guinda">{val_incidentes}</p>
+            <div class="kpi-content">
+                <div class="kpi-title-guinda">Incidentes en la selección</div>
+                <p class="kpi-value-guinda">{val_incidentes}</p>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         
     with col2:
         st.markdown(f"""
         <div class="kpi-card-guinda">
-            <div class="kpi-title-guinda">
-                <img src="data:image/png;base64,{embudo}" class="kpi-icon">
-                Del total cargado
+            <div class="kpi-icon-wrapper">
+                <img src="data:image/png;base64,{icono_embudo}" class="kpi-icon">
             </div>
-            <p class="kpi-value-guinda">{val_porcentaje}</p>
+            <div class="kpi-content">
+                <div class="kpi-title-guinda">Del total cargado</div>
+                <p class="kpi-value-guinda">{val_porcentaje}</p>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
     with col3:
         st.markdown(f"""
         <div class="kpi-card-guinda">
-            <div class="kpi-title-guinda">
-                <img src="data:image/png;base64,{tendencias}" class="kpi-icon">
-                Promedio diario
+            <div class="kpi-icon-wrapper">
+                <img src="data:image/png;base64,{icono_tendencias}" class="kpi-icon">
             </div>
-            <p class="kpi-value-guinda">{val_promedio}</p>
+            <div class="kpi-content">
+                <div class="kpi-title-guinda">Promedio diario</div>
+                <p class="kpi-value-guinda">{val_promedio}</p>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
     with col4:
         st.markdown(f"""
         <div class="kpi-card-guinda">
-            <div class="kpi-title-guinda">
-                <img src="data:image/png;base64,{reloj}" class="kpi-icon">
-                Hora pico
+            <div class="kpi-icon-wrapper">
+                <img src="data:image/png;base64,{icono_reloj}" class="kpi-icon">
             </div>
-            <p class="kpi-value-guinda">{val_hora}</p>
+            <div class="kpi-content">
+                <div class="kpi-title-guinda">Hora pico</div>
+                <p class="kpi-value-guinda">{val_hora}</p>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
