@@ -1,5 +1,6 @@
 import streamlit as st
-
+import os
+import base64
 from utils.carga_datos import cargar_incidentes, filtrar_incidentes
 from utils.graficas import (
     serie_temporal,
@@ -24,6 +25,12 @@ st.html(
     """
 )
 
+def get_base64_image(image_path):
+    try:
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode()
+    except FileNotFoundError:
+        return "" # Devuelve vacío si no encuentra el ícono para no romper la app
 
 st.title("Panorama histórico")
 
@@ -79,7 +86,11 @@ with st.container(horizontal=True):
     val_porcentaje = f"{100 * len(df_filtrado) / len(df):.1f}%"
     val_promedio = f"{len(df_filtrado) / dias_periodo:.1f}"
     val_hora = f"{hora_pico:02d}:00"
-    
+
+    mapa = get_base64_image("icons/mapa.png")
+    embudo = get_base64_image("icons/embudo.png")
+    tendencias = get_base64_image("icons/tendencias.png")
+    reloj = get_base64_image("icons/reloj.png")
     # Inyectamos el CSS actualizado para tarjetas con fondo Guinda
     st.markdown("""
     <style>
@@ -123,7 +134,7 @@ with st.container(horizontal=True):
         st.markdown(f"""
         <div class="kpi-card-guinda">
             <div class="kpi-title-guinda">
-                <!-- INSERTA TU ICONO AQUÍ -->
+                <img src="data:image/png;base64,{mapa}" class="kpi-icon">
                 Incidentes en la selección
             </div>
             <p class="kpi-value-guinda">{val_incidentes}</p>
@@ -134,7 +145,7 @@ with st.container(horizontal=True):
         st.markdown(f"""
         <div class="kpi-card-guinda">
             <div class="kpi-title-guinda">
-                <!-- INSERTA TU ICONO AQUÍ -->
+                <img src="data:image/png;base64,{embudo}" class="kpi-icon">
                 Del total cargado
             </div>
             <p class="kpi-value-guinda">{val_porcentaje}</p>
@@ -145,7 +156,7 @@ with st.container(horizontal=True):
         st.markdown(f"""
         <div class="kpi-card-guinda">
             <div class="kpi-title-guinda">
-                <!-- INSERTA TU ICONO AQUÍ -->
+                <img src="data:image/png;base64,{tendencias}" class="kpi-icon">
                 Promedio diario
             </div>
             <p class="kpi-value-guinda">{val_promedio}</p>
@@ -156,7 +167,7 @@ with st.container(horizontal=True):
         st.markdown(f"""
         <div class="kpi-card-guinda">
             <div class="kpi-title-guinda">
-                <!-- INSERTA TU ICONO AQUÍ -->
+                <img src="data:image/png;base64,{reloj}" class="kpi-icon">
                 Hora pico
             </div>
             <p class="kpi-value-guinda">{val_hora}</p>
