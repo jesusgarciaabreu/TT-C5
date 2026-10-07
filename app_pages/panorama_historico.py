@@ -119,6 +119,10 @@ with st.container(horizontal=True):
             height: 18px;
             fill: currentColor;
         }
+        .kpi-icon {
+            width: 20px;
+            height: 20px;
+        }
         .kpi-value-guinda {
             color: #FFFFFF; /* Blanco puro para los números */
             font-size: 1.8rem;
