@@ -118,7 +118,7 @@ with st.container(horizontal=True):
             width: 100%;             /* Fuerza al contenedor a usar todo el espacio disponible */
         }
         .kpi-card-guinda {
-            flex: 1 1 220px;         /* Magia responsiva: Crece, se encoge y tiene 220px de base */
+            flex: 1 1 20%;         /* Magia responsiva: Crece, se encoge y tiene 220px de base */
             min-width: 220px;        /* Límite absoluto antes de saltar a la siguiente fila */
             background-color: #9F2241;
             border-radius: 8px;
@@ -144,7 +144,7 @@ with st.container(horizontal=True):
         }
         .kpi-title-guinda {
             color: #E2E8F0;
-            font-size: 0.85rem;
+            font-size: 2rem;
             font-weight: 500;
             margin: 0 0 2px 0;       
             line-height: 1.2;
@@ -152,7 +152,7 @@ with st.container(horizontal=True):
         }
         .kpi-value-guinda {
             color: #FFFFFF;
-            font-size: 2.2rem !important;       
+            font-size: 2.5rem !important;       
             font-weight: 800;
             margin: 0;
             line-height: 1;
