@@ -138,13 +138,14 @@ with st.container(horizontal=True):
         }
         .kpi-text-container {
             display: flex;
+            padding: 5px;
             flex-direction: column;  
             justify-content: center;
             overflow: hidden;        
         }
         .kpi-title-guinda {
             color: #E2E8F0;
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 500;
             margin: 0 0 2px 0;       
             line-height: 1.2;
