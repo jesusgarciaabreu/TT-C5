@@ -116,8 +116,8 @@ with st.container(horizontal=True):
             justify-content: center;
         }
         .kpi-icon {
-            width: 44px;             /* Ícono más grande para la columna izquierda */
-            height: 44px;
+            width: 50px;             /* Ícono más grande para la columna izquierda */
+            height: 50px;
             filter: brightness(0) invert(1); 
         }
         .kpi-content {
@@ -133,7 +133,7 @@ with st.container(horizontal=True):
         }
         .kpi-value-guinda {
             color: #FFFFFF;
-            font-size: 2.5rem;
+            font-size: 4rem;
             font-weight: 800;
             margin: 0;
             line-height: 1;
