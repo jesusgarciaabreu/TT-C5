@@ -106,20 +106,32 @@ with st.container(horizontal=True):
     icono_embudo = get_base64_image("icons/embudo.png")
     icono_tendencias = get_base64_image("icons/tendencias.png")
     icono_reloj = get_base64_image("icons/reloj.png")
-    
 
     css_tarjetas = """
     <style>
+        /* El contenedor principal */
         .kpi-wrapper {
-            display: flex;
-            flex-wrap: wrap;         
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr; /* Fuerza 4 columnas exactamente iguales */
             gap: 16px;
             margin-bottom: 1.5rem;
             width: 100%;             
         }
+        
+        /* Regla para pantallas pequeñas (Responsivo) */
+        @media (max-width: 800px) {
+            .kpi-wrapper {
+                grid-template-columns: 1fr 1fr; /* Pasa a 2 columnas en tablets */
+            }
+        }
+        @media (max-width: 500px) {
+            .kpi-wrapper {
+                grid-template-columns: 1fr; /* Pasa a 1 columna en celulares */
+            }
+        }
+
         .kpi-card-guinda {
-            flex: 1;         
-            min-width: 220px;        
+            width: 100%;             
             background-color: #9F2241;
             border-radius: 8px;
             padding: 16px 12px;
@@ -138,7 +150,7 @@ with st.container(horizontal=True):
         }
         .kpi-text-container {
             display: flex;
-            padding: 16px;
+            padding: 16px 0; /* Ajuste ligero del padding interno */
             flex-direction: column;  
             justify-content: center;
             overflow: hidden;        
@@ -160,7 +172,6 @@ with st.container(horizontal=True):
         }
     </style>
     """
-
     html_tarjetas = f"""
     <div class="kpi-wrapper">
         <div class="kpi-card-guinda">
