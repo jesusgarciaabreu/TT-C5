@@ -97,37 +97,44 @@ with st.container(horizontal=True):
         .kpi-card-guinda {
             background-color: #9F2241;
             border-radius: 10px;
-            padding: 16px;
+            padding: 16px 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             margin-bottom: 1rem;
             transition: transform 0.2s ease;
+            display: flex;           
+            align-items: center;     
+            gap: 18px;               
         }
         .kpi-card-guinda:hover {
             transform: translateY(-2px);
         }
-        .kpi-title-guinda {
-            color: #E2E8F0; /* Gris muy claro para contraste */
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 8px;
+        .kpi-icon-wrapper {
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-        .kpi-title-guinda svg, .kpi-title-guinda img {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
+            justify-content: center;
         }
         .kpi-icon {
-            width: 20px;
-            height: 20px;
+            width: 36px;             
+            height: 36px;
+            filter: brightness(0) invert(1); 
+        }
+        .kpi-content {
+            display: flex;
+            flex-direction: column; 
+        }
+        .kpi-title-guinda {
+            color: #E2E8F0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            line-height: 1.2;
         }
         .kpi-value-guinda {
-            color: #FFFFFF; /* Blanco puro para los números */
+            color: #FFFFFF;
             font-size: 1.8rem;
             font-weight: 800;
             margin: 0;
+            line-height: 1;
         }
     </style>
     """, unsafe_allow_html=True)
