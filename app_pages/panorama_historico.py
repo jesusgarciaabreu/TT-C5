@@ -133,7 +133,7 @@ with st.container(horizontal=True):
         }
         .kpi-value-guinda {
             color: #FFFFFF;
-            font-size: 8rem;
+            font-size: 3rem !important;
             font-weight: 800;
             margin: 0;
             line-height: 1;
