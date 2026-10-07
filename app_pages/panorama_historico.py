@@ -118,7 +118,7 @@ with st.container(horizontal=True):
             width: 100%;             /* Fuerza al contenedor a usar todo el espacio disponible */
         }
         .kpi-card-guinda {
-            flex: 1 1 20%;         /* Magia responsiva: Crece, se encoge y tiene 220px de base */
+            flex: 1 1 23%;         /* Magia responsiva: Crece, se encoge y tiene 220px de base */
             min-width: 220px;        /* Límite absoluto antes de saltar a la siguiente fila */
             background-color: #9F2241;
             border-radius: 8px;
@@ -127,7 +127,7 @@ with st.container(horizontal=True):
             display: flex;           
             align-items: center;     
             gap: 12px;
-            height: 110px;           
+            height: 125px;           
             box-sizing: border-box;  
         }
         .kpi-icon {
