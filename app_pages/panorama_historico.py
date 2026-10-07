@@ -166,7 +166,7 @@ with st.container(horizontal=True):
         <div class="kpi-card-guinda">
             <img src="data:image/png;base64,{icono_mapa}" class="kpi-icon">
             <div class="kpi-text-container">
-                <div class="kpi-title-guinda">Incidentes en la selección</div>
+                <div class="kpi-title-guinda">Incidentes</div>
                 <div class="kpi-value-guinda">{val_incidentes}</div>
             </div>
         </div>
