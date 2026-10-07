@@ -29,4 +29,5 @@ pagina = st.navigation(
     ],
     position="top",
 )
+
 pagina.run()
