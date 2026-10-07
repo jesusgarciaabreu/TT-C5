@@ -107,16 +107,20 @@ with st.container(horizontal=True):
     icono_tendencias = get_base64_image("icons/tendencias.png")
     icono_reloj = get_base64_image("icons/reloj.png")
     
+    
+    
     css_tarjetas = """
     <style>
         .kpi-wrapper {
-            display: grid;
-            /* La magia responsive: nunca serán menores a 230px, si no caben, bajan de fila */
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            display: flex;
+            flex-wrap: wrap;         /* Permite que las tarjetas bajen de renglón si no caben */
             gap: 16px;
             margin-bottom: 1.5rem;
+            width: 100%;             /* Fuerza al contenedor a usar todo el espacio disponible */
         }
         .kpi-card-guinda {
+            flex: 1 1 220px;         /* Magia responsiva: Crece, se encoge y tiene 220px de base */
+            min-width: 220px;        /* Límite absoluto antes de saltar a la siguiente fila */
             background-color: #9F2241;
             border-radius: 8px;
             padding: 16px 12px;
