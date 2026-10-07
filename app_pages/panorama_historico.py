@@ -107,10 +107,11 @@ with st.container(horizontal=True):
     icono_tendencias = get_base64_image("icons/tendencias.png")
     icono_reloj = get_base64_image("icons/reloj.png")
     
+    # 1. Definimos el CSS (Usando Flexbox para un diseño verdaderamente responsivo)
     css_tarjetas = """
     <style>
         .kpi-wrapper {
-            display: display;
+            display: flex;
             flex-wrap: wrap;         /* Permite que las tarjetas bajen de renglón si no caben */
             gap: 16px;
             margin-bottom: 1.5rem;
@@ -143,7 +144,7 @@ with st.container(horizontal=True):
         }
         .kpi-title-guinda {
             color: #E2E8F0;
-            font-size: 2rem;
+            font-size: 0.85rem;
             font-weight: 500;
             margin: 0 0 2px 0;       
             line-height: 1.2;
@@ -151,7 +152,7 @@ with st.container(horizontal=True):
         }
         .kpi-value-guinda {
             color: #FFFFFF;
-            font-size: 2.5rem !important;       
+            font-size: 2.2rem !important;       
             font-weight: 800;
             margin: 0;
             line-height: 1;
