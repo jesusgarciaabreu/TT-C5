@@ -51,7 +51,45 @@ def titulo_estilizado(texto, color_texto="#1A365D"):
     st.markdown(html, unsafe_allow_html=True)
 
 
-st.title("Panorama histórico")
+#st.title("Panorama histórico")
+
+banner_html = """
+<style>
+    .hero-banner {
+        background: linear-gradient(135deg, #9F2241 0%, #1A365D 100%);
+        padding: 2.5rem 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        color: white;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .hero-title {
+        font-size: 2.4rem;
+        font-weight: 800;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        letter-spacing: 0.5px;
+    }
+    .hero-subtitle {
+        font-size: 1.1rem;
+        font-weight: 400;
+        margin-top: 8px;
+        opacity: 0.9;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+</style>
+
+<div class="hero-banner">
+    <div class="hero-title">Panorama Histórico</div>
+    <div class="hero-subtitle">Análisis espaciotemporal de siniestros viales en Iztapalapa</div>
+</div>
+"""
+
+st.markdown(banner_html, unsafe_allow_html=True)
 
 df = cargar_incidentes()
 
