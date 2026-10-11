@@ -7,3 +7,12 @@ scipy>=1.11
 
 SQLAlchemy>=2.0
 psycopg2-binary
+
+
+streamlit
+pandas
+numpy
+pydeck
+scipy
+torch
+torch_geometric
