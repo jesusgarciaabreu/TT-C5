@@ -1,0 +1,35 @@
+# Tema con variante clara y oscura -- el usuario elige cuál usar desde
+# el menú del dashboard (☰ arriba a la derecha -> Settings -> Theme).
+
+[theme]
+base = "dark"
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+baseRadius = "medium"
+linkUnderline = false
+
+[theme.light]
+primaryColor = "#741B47"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F7F4F6"
+textColor = "#1E1A1D"
+borderColor = "#E3DAE0"
+
+[theme.dark]
+primaryColor = "#C9507A"
+backgroundColor = "#0D1020"
+secondaryBackgroundColor = "#161B2E"
+textColor = "#ECEEF5"
+borderColor = "#2A3150"
+
+[server]
+runOnSave = true
+# Necesario para compartir por túneles/reenvío de puertos (VS Code Dev
+# Tunnels, ngrok, etc.): la página carga pero los datos/gráficas se
+# quedan en "Please wait..." si el proxy del túnel no reenvía bien el
+# handshake del WebSocket con CORS activado, o si elimina el encabezado
+# Sec-WebSocket-Extensions de compresión. Aceptable para un dashboard
+# interno compartido solo con el equipo; si esto se vuelve una
+# instalación pública/permanente, hay que revisar esto con más cuidado
+# (ver README).
+enableCORS = false
+enableWebsocketCompression = false
