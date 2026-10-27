@@ -85,7 +85,7 @@ banner_html = """
 </style>
 
 <div class="hero-banner">
-    <div class="hero-title">Panorama Histórico (alfa)</div>
+    <div class="hero-title">Panorama Histórico</div>
     <div class="hero-subtitle">Análisis espaciotemporal de siniestros viales en Iztapalapa</div>
 </div>
 """
