@@ -1,0 +1,14 @@
+streamlit>=1.38
+pandas>=2.0
+numpy>=1.26
+plotly>=5.24
+scipy>=1.11
+pydeck
+
+# Conectores para Neon PostgreSQL
+SQLAlchemy>=2.0
+psycopg2-binary
+
+# Para reactivar el pronóstico (pronostico_pausado/): 
+# torch>=2.1 
+# torch_geometric>=2.5
